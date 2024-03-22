@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 public class TokenRepository {
     public static final String HASH_KEY = "JWT_TOKEN";
 
+    @Autowired
     RedisTemplate template;
     public void saveUserToken(int idUser, String token){
         template.opsForHash().put(HASH_KEY,idUser,token);

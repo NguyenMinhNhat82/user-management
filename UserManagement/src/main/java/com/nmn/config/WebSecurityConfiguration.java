@@ -32,7 +32,7 @@ public class WebSecurityConfiguration  {
                 .requestMatchers("/authenticate",
                         "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/api/**","/api/auth/**")
+                .authorizeHttpRequests().requestMatchers("/api/**","/api/auth/**", "/refresh-token","/logout-token")
                 .authenticated()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/api/user").hasAnyAuthority("ADMIN")

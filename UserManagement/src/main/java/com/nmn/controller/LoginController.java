@@ -11,6 +11,8 @@ import com.nmn.util.JwtUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.antlr.v4.runtime.Token;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.security.Principal;
 
 @RestController
 public class LoginController {
@@ -64,8 +67,27 @@ public class LoginController {
         if(!jwt.isEmpty()  || user != null){
             tokenService.saveToken(user.getId(),jwt);
         }
-        System.out.println(tokenService);
         return new AuthenticationResponse(jwt);
 
+    }
+    @GetMapping("/refresh-token")
+    public AuthenticationResponse reFreshToken(Principal user){
+        User userAuthentication = userService.findUserByEmail(user.getName());
+        if(user!= null){
+            final String jwt = jwtUtil.generateToken(userAuthentication.getEmail());
+            tokenService.saveToken(userAuthentication.getId(),jwt);
+            return new AuthenticationResponse(jwt);
+        }
+        return new AuthenticationResponse("");
+    }
+
+    @GetMapping("/logout-token")
+    public AuthenticationResponse logout(Principal user){
+        User userAuthentication = userService.findUserByEmail(user.getName());
+        if(user!= null){
+            tokenService.deleteToken(userAuthentication.getId());
+            return new AuthenticationResponse("Logged out");
+        }
+        return new AuthenticationResponse("Log out fail");
     }
 }
