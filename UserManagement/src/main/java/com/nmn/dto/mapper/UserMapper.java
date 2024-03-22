@@ -1,7 +1,7 @@
 package com.nmn.dto.mapper;
 
 import com.nmn.dto.UserDTO;
-import com.nmn.model.Role;
+import com.nmn.model.enumType.Role;
 import com.nmn.model.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;

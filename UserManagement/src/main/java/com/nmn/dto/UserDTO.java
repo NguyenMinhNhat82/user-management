@@ -1,7 +1,5 @@
 package com.nmn.dto;
 
-import com.nmn.model.Role;
-
 import java.util.Date;
 
 public class UserDTO {

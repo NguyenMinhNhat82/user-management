@@ -1,12 +1,10 @@
 package com.nmn.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.nmn.model.enumType.Role;
 import jakarta.persistence.*;
-import lombok.Data;
 
 
-import java.util.Collection;
 import java.util.Date;
 
 @Entity

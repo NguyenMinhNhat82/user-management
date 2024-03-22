@@ -1,4 +1,4 @@
-package com.nmn.model;
+package com.nmn.model.enumType;
 
 public  enum Role {
     ADMIN,USER
